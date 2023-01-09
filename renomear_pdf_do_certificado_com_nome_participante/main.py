@@ -11,6 +11,9 @@
 import PyPDF2
 import os
 from unidecode import unidecode
+from typing import Final
+
+PASTA_COM_ARQUIVOS_PDF: Final = "/home/ricardo/Documentos/Trabalho em casa/CERTIFICADOS/"
 
 
 def abrir_arquivo_certificado_pdf(nome_arquivo_pdf):
@@ -32,10 +35,11 @@ def converter_conteudo_para_texto(arquivo_certificado_pdf):
 
 def localizar_nome_do_participante(conteudo_texto_do_pdf):
     try:
-        linha_com_nome_participante = 2
+        linha_com_nome_participante = 3
         nome_localizado = conteudo_texto_do_pdf.splitlines()[linha_com_nome_participante]
-        nome_sem_acento = unidecode(nome_localizado)
-        return nome_sem_acento
+        # nome_sem_acento = unidecode(nome_localizado)  # Elimina a acentuação.
+        # return nome_sem_acento
+        return nome_localizado
     except:
         return None
 
@@ -50,18 +54,15 @@ def renomear_arquivo_pdf_com_nome_do_participante(arquivo_certificado_pdf, novo_
 
 if __name__ == "__main__":
     quantidade_arquivo_renomeado: int = 0
-    pasta_com_arquivos_pdf: str = "./certificados/"
     print("Renomeando arquivos PDF ...")
-    # caminhos = [os.path.join(pasta_com_arquivos_pdf, nome) for nome in os.listdir(pasta_com_arquivos_pdf)]
-    # arquivos = [arq for arq in caminhos if os.path.isfile(arq)]
     
-    for nome_arquivo_pdf in os.listdir(pasta_com_arquivos_pdf):
+    for nome_arquivo_pdf in os.listdir(PASTA_COM_ARQUIVOS_PDF):
         try:
-            nome_arquivo_pdf_com_caminho = pasta_com_arquivos_pdf+nome_arquivo_pdf
+            nome_arquivo_pdf_com_caminho = PASTA_COM_ARQUIVOS_PDF+nome_arquivo_pdf
             arquivo_certificado_pdf = abrir_arquivo_certificado_pdf(nome_arquivo_pdf_com_caminho)
             conteudo_texto_do_pdf = converter_conteudo_para_texto(arquivo_certificado_pdf)
             nome_no_certificado = localizar_nome_do_participante(conteudo_texto_do_pdf)
-            novo_nome_pdf = f"{pasta_com_arquivos_pdf}CERTIFICADO GIT - {nome_no_certificado}.pdf"
+            novo_nome_pdf = f"{PASTA_COM_ARQUIVOS_PDF}CERTIFICADO DOCKER - {nome_no_certificado}.pdf"
             renomear_arquivo_pdf_com_nome_do_participante(nome_arquivo_pdf_com_caminho, novo_nome_pdf)
             quantidade_arquivo_renomeado += 1
             print(f"{quantidade_arquivo_renomeado}, ", end="")

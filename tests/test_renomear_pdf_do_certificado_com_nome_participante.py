@@ -15,22 +15,22 @@ def test_version():
     assert __version__ == '0.1.0'
 
 def test_abrir_arquivo_certificado_pdf():
-    assert app.abrir_arquivo_certificado_pdf("./certificados/CERTIFICADO GIT - JOSE MONTEIRO DA ROCHA JUNIOR.pdf") != None
+    assert app.abrir_arquivo_certificado_pdf(app.PASTA_COM_ARQUIVOS_PDF+"RODRIGO FERNANDO.pdf") != None
 
 def test_abrir_arquivo_certificado_pdf_invalido():
     assert app.abrir_arquivo_certificado_pdf("") == None
 
 def test_converter_conteudo_para_texto():
-    assert app.converter_conteudo_para_texto(app.abrir_arquivo_certificado_pdf("./certificados/CERTIFICADO GIT - JOSE MONTEIRO DA ROCHA JUNIOR.pdf")) != None
+    assert app.converter_conteudo_para_texto(app.abrir_arquivo_certificado_pdf(app.PASTA_COM_ARQUIVOS_PDF+"RODRIGO FERNANDO.pdf")) != None
 
 def test_converter_conteudo_para_texto_em_branco():
-    assert app.converter_conteudo_para_texto(app.abrir_arquivo_certificado_pdf("./certificados/CERTIFICADO GIT - JOSE MONTEIRO DA ROCHA JUNIOR.pdf")) != ""
+    assert app.converter_conteudo_para_texto(app.abrir_arquivo_certificado_pdf(app.PASTA_COM_ARQUIVOS_PDF+"RODRIGO FERNANDO.pdddddd")) != ""
 
 def test_localizar_nome_do_participante():
-    assert app.localizar_nome_do_participante(app.converter_conteudo_para_texto(app.abrir_arquivo_certificado_pdf("./certificados/CERTIFICADO GIT - JOSE MONTEIRO DA ROCHA JUNIOR.pdf"))) == "JOSE MONTEIRO DA ROCHA JUNIOR"
+    assert app.localizar_nome_do_participante(app.converter_conteudo_para_texto(app.abrir_arquivo_certificado_pdf(app.PASTA_COM_ARQUIVOS_PDF+"RODRIGO FERNANDO.pdf"))) == "RODRIGO FERNANDO PINHEIRO OLIVEIRA"
 
 def test_localizar_nome_do_participante_invalido():
-    assert app.localizar_nome_do_participante(app.converter_conteudo_para_texto(app.abrir_arquivo_certificado_pdf("./certificados/CERTIFICADO - JOSE ONTEIRO.pdf"))) == None
+    assert app.localizar_nome_do_participante(app.converter_conteudo_para_texto(app.abrir_arquivo_certificado_pdf("./certificados/CERTIFICADO - JOSE ONTEIRO.pdfffffff"))) == None
  
 def test_renomear_arquivo_pdf_com_nome_do_participante():
-    assert app.renomear_arquivo_pdf_com_nome_do_participante("./certificados/CERTIFICADO GIT - JOSE MONTEIRO DA ROCHA JUNIOR.pdf", "./certificados/CERTIFICADO GIT - JOSE MONTEIRO DA ROCHA JUNIOR.pdf") != None
+    assert app.renomear_arquivo_pdf_com_nome_do_participante(app.PASTA_COM_ARQUIVOS_PDF+"RODRIGO FERNANDO.pdf", app.PASTA_COM_ARQUIVOS_PDF+"RODRIGO FERNANDOx.pdf") != None
