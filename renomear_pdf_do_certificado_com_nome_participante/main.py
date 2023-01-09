@@ -37,9 +37,8 @@ def localizar_nome_do_participante(conteudo_texto_do_pdf):
     try:
         linha_com_nome_participante = 3
         nome_localizado = conteudo_texto_do_pdf.splitlines()[linha_com_nome_participante]
-        # nome_sem_acento = unidecode(nome_localizado)  # Elimina a acentuação.
-        # return nome_sem_acento
-        return nome_localizado
+        nome_sem_acentuacao = unidecode(nome_localizado)  
+        return nome_sem_acentuacao
     except:
         return None
 
